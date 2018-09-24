@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2026
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Brio.Data", "Brio.Data\Brio.Data.csproj", "{CBCAF6DF-D45C-41F7-A1EA-AEC7156E6ABB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Brio.Domain", "Brio.Domain\Brio.Domain.csproj", "{C875D162-6A0E-4FBA-9C16-753F8C2AD007}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Brio.API", "Brio.API\Brio.API.csproj", "{B1425A21-C7F4-4652-9A47-48E6BB49A4CE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CBCAF6DF-D45C-41F7-A1EA-AEC7156E6ABB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBCAF6DF-D45C-41F7-A1EA-AEC7156E6ABB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBCAF6DF-D45C-41F7-A1EA-AEC7156E6ABB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBCAF6DF-D45C-41F7-A1EA-AEC7156E6ABB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C875D162-6A0E-4FBA-9C16-753F8C2AD007}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C875D162-6A0E-4FBA-9C16-753F8C2AD007}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C875D162-6A0E-4FBA-9C16-753F8C2AD007}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C875D162-6A0E-4FBA-9C16-753F8C2AD007}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1425A21-C7F4-4652-9A47-48E6BB49A4CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1425A21-C7F4-4652-9A47-48E6BB49A4CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1425A21-C7F4-4652-9A47-48E6BB49A4CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1425A21-C7F4-4652-9A47-48E6BB49A4CE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5FAEE53E-9FB4-4851-91CF-AFC4425E3177}
+	EndGlobalSection
+EndGlobal
