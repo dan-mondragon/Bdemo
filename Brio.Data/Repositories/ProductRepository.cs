@@ -43,7 +43,7 @@ namespace Brio.Data.Repositories
 
         public async Task<List<Product>> GetAllAsync(CancellationToken ct = default(CancellationToken))
         {
-            return await _context.Product.ToListAsync();
+            return await _context.Product.Include(p => p.Brand).ToListAsync();
         }
 
         public async Task<List<Product>> GetByBrandIdAsync(int id, CancellationToken ct = default(CancellationToken))

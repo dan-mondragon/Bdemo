@@ -50,9 +50,11 @@ namespace Brio.Domain.Supervisors
 
         public async Task<BrandViewModel> GetBrandByIdAsync(int id, CancellationToken ct = default(CancellationToken))
         {
-            var brands = BrandConverter.Convert(await _repository.GetByIdAsync(id, ct));
-            brands.Products = ProductConverter.ConvertList(await _productRepository.GetByBrandIdAsync(brands.BrandId, ct));
-            return brands;
+            var brand = await _repository.GetByIdAsync(id, ct);
+            if (brand == null) { return null; }
+            var brandVM = BrandConverter.Convert(brand);
+            brandVM.Products = ProductConverter.ConvertList(await _productRepository.GetByBrandIdAsync(brandVM.BrandId, ct));
+            return brandVM;
         }
 
         public async Task<bool> UpdateBrandAsync(BrandViewModel brandtViewModel, CancellationToken ct = default(CancellationToken))

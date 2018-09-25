@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -8,27 +7,26 @@ using Brio.Domain.Supervisors;
 using Brio.Domain.ViewModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 
 namespace Brio.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BrandController : ControllerBase
+    public class ProductController : ControllerBase
     {
-        private readonly IBrandSupervisor _supervisor;
-        public BrandController(IBrandSupervisor supervisor)
+        private readonly IProductSupervisor _supervisor;
+        public ProductController(IProductSupervisor supervisor)
         {
             _supervisor = supervisor;
         }
 
         [HttpGet]
-        [Produces(typeof(List<BrandViewModel>))]
+        [Produces(typeof(List<ProductViewModel>))]
         public async Task<IActionResult> Get(CancellationToken ct = default(CancellationToken))
         {
             try
             {
-                return new ObjectResult(await _supervisor.GetAllBrandAsync(ct));
+                return new ObjectResult(await _supervisor.GetAllProductAsync(ct));
             }
             catch (Exception ex)
             {
@@ -37,16 +35,17 @@ namespace Brio.API.Controllers
         }
 
         [HttpGet("{id}")]
-        [Produces(typeof(BrandViewModel))]
+        [Produces(typeof(ProductViewModel))]
         public async Task<IActionResult> Get(int id, CancellationToken ct = default(CancellationToken))
         {
             try
             {
-                if (await _supervisor.GetBrandByIdAsync(id, ct) == null)
+                var product = await _supervisor.GetProductByIdAsync(id, ct);
+                if (product == null)
                 {
                     return NotFound();
                 }
-                return Ok(await _supervisor.GetBrandByIdAsync(id, ct));
+                return Ok(product);
             }
             catch (Exception ex)
             {
@@ -55,15 +54,15 @@ namespace Brio.API.Controllers
         }
 
         [HttpPost]
-        [Produces(typeof(BrandViewModel))]
-        public async Task<IActionResult> Post([FromBody]BrandViewModel input, CancellationToken ct = default(CancellationToken))
+        [Produces(typeof(ProductViewModel))]
+        public async Task<IActionResult> Post([FromBody]ProductViewModel input, CancellationToken ct = default(CancellationToken))
         {
             try
             {
                 if (input == null)
                     return BadRequest();
 
-                return StatusCode(201, await _supervisor.AddBrandAsync(input, ct));
+                return StatusCode(201, await _supervisor.AddProductAsync(input, ct));
             }
             catch (Exception ex)
             {
@@ -72,20 +71,20 @@ namespace Brio.API.Controllers
         }
 
         [HttpPut("{id}")]
-        [Produces(typeof(BrandViewModel))]
-        public async Task<IActionResult> Put(int id, [FromBody]BrandViewModel input, CancellationToken ct = default(CancellationToken))
+        [Produces(typeof(ProductViewModel))]
+        public async Task<IActionResult> Put(int id, [FromBody]ProductViewModel input, CancellationToken ct = default(CancellationToken))
         {
             try
             {
                 if (input == null)
                     return BadRequest();
-                if (await _supervisor.GetBrandByIdAsync(id, ct) == null)
+                if (await _supervisor.GetProductByIdAsync(id, ct) == null)
                 {
                     return NotFound();
                 }
 
                 input.BrandId = id;
-                if (await _supervisor.UpdateBrandAsync(input, ct))
+                if (await _supervisor.UpdateProductAsync(input, ct))
                 {
                     return Ok(input);
                 }
@@ -104,12 +103,12 @@ namespace Brio.API.Controllers
         {
             try
             {
-                if (await _supervisor.GetBrandByIdAsync(id, ct) == null)
+                if (await _supervisor.GetProductByIdAsync(id, ct) == null)
                 {
                     return NotFound();
                 }
 
-                if (await _supervisor.DeleteBrandAsync(id, ct))
+                if (await _supervisor.DeleteProductAsync(id, ct))
                 {
                     return Ok();
                 }

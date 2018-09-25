@@ -37,6 +37,7 @@ namespace Brio.API
             services.AddScoped<IBrandRepository, BrandRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IBrandSupervisor, BrandSupervisor>();
+            services.AddScoped<IProductSupervisor, ProductSupervisor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
