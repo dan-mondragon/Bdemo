@@ -43,10 +43,11 @@ namespace Brio.Domain.Supervisors
         {
             var products = await _repository.GetAllAsync(ct);
             var productsVM = ProductConverter.ConvertList(products);
-            foreach (var product in productsVM)
+            for(int i = 0; i < products.Count; i++)
             {
-                product.BrandName = product.Brand.Name;
+                productsVM[i].BrandName = products[i].Brand.Name;
             }
+
             return productsVM;
         }
 

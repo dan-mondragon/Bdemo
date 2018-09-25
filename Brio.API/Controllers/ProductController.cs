@@ -83,7 +83,7 @@ namespace Brio.API.Controllers
                     return NotFound();
                 }
 
-                input.BrandId = id;
+                input.ProductId = id;
                 if (await _supervisor.UpdateProductAsync(input, ct))
                 {
                     return Ok(input);

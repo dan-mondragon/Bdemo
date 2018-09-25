@@ -53,7 +53,7 @@ namespace Brio.Data.Repositories
 
         public async Task<Product> GetByIdAsync(int id, CancellationToken ct = default(CancellationToken))
         {
-            return await _context.Product.FindAsync(id);
+            return await _context.Product.Include(p => p.Brand).FirstOrDefaultAsync(p => p.ProductId.Equals(id));
         }
 
         public async Task<bool> UpdateAsync(Product product, CancellationToken ct = default(CancellationToken))
@@ -61,8 +61,7 @@ namespace Brio.Data.Repositories
             if (!await ProductExists(product.ProductId))
                 return false;
 
-            _context.Product.Update(product);
-            _context.Update(product);
+            _context.Entry(product).State = EntityState.Modified;
             await _context.SaveChangesAsync(ct);
 
             return true;
