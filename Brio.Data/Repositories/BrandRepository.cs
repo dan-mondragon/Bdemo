@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace Brio.Data.Repositories
 {
@@ -45,9 +46,9 @@ namespace Brio.Data.Repositories
             _context.Dispose();
         }
 
-        public async Task<List<Brand>> GetAllAsync(CancellationToken ct = default(CancellationToken))
-        {
-            return await _context.Brand.ToListAsync(ct);
+        public IQueryable<Brand> GetAllAsync(CancellationToken ct = default(CancellationToken))
+        {            
+            return (from b in _context.Brand select b).AsQueryable();
         }
 
         public async Task<Brand> GetByIdAsync(int id, CancellationToken ct = default(CancellationToken))

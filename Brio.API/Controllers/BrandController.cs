@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Brio.Domain.Supervisors;
+using Brio.Domain.Utils;
 using Brio.Domain.ViewModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -24,11 +25,14 @@ namespace Brio.API.Controllers
 
         [HttpGet]
         [Produces(typeof(List<BrandViewModel>))]
-        public async Task<IActionResult> Get(CancellationToken ct = default(CancellationToken))
+        public async Task<IActionResult> Get([FromQuery]PagingParameter pagingParameter, CancellationToken ct = default(CancellationToken))
         {
             try
             {
-                return new ObjectResult(await _supervisor.GetAllBrandAsync(ct));
+                var results = await _supervisor.GetAllBrandAsync(pagingParameter, ct);
+                
+                Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(results.Item2));
+                return new ObjectResult(results.Item1);
             }
             catch (Exception ex)
             {
