@@ -24,6 +24,21 @@ namespace Brio.Domain.Extensions
             result.PageCount = (int)Math.Ceiling(pageCount);
 
             var skip = (page - 1) * pageSize;
+
+            if (!string.IsNullOrEmpty(pagingParameter.Sort))
+            {
+                string sort = pagingParameter.Sort.StartsWith("-") ? pagingParameter.Sort.Substring(1) : pagingParameter.Sort;
+                var type = typeof(T);
+                var propertyInfo = type.GetProperty(sort);
+                if(propertyInfo != null)
+                {
+                    if (pagingParameter.Sort.StartsWith("-"))
+                        query = query.OrderByDescending(x => propertyInfo.GetValue(x, null));
+                    else
+                        query = query.OrderBy(x => propertyInfo.GetValue(x, null));
+                }                
+            }
+
             result.Results = query.Skip(skip).Take(pageSize).ToList();
 
             return result;

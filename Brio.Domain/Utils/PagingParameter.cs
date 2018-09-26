@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Newtonsoft.Json;
 
 namespace Brio.Domain.Utils
 {
@@ -10,7 +8,10 @@ namespace Brio.Domain.Utils
 
         public int pageNumber { get; set; } = 1;
 
-        public int _pageSize { get; set; } = 10;
+        [JsonIgnore]
+        private int _pageSize { get; set; } = 10;
+
+        public string Sort { get; set; } = "";
 
         public int pageSize
         {
