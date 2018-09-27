@@ -19,7 +19,6 @@ namespace Brio.Domain.Extensions
             result.TotalPages = (int)Math.Ceiling(result.Total / (double)pageSize);
             result.PreviousPage = page > 1 ? "Yes" : "No";
             result.NextPage = page < result.TotalPages ? "Yes" : "No";
-
             var pageCount = (double)result.Total / pageSize;
             result.PageCount = (int)Math.Ceiling(pageCount);
 

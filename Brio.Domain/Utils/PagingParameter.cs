@@ -12,6 +12,7 @@ namespace Brio.Domain.Utils
         private int _pageSize { get; set; } = 10;
 
         public string Sort { get; set; } = "";
+        public string Fields { get; set; } = "";
 
         public int pageSize
         {
